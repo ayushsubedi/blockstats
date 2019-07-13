@@ -1,5 +1,6 @@
 import logging
 import requests
+import time
 
 def download(url, timeout=10):
     logging.info('Downloading. url: %s', url)
@@ -25,6 +26,7 @@ def download_paged_array(url):
             return all_names
 
 def _download_page(url, page):
+    time.sleep(2) # to get around api rate limitting blockstack 
     logging.info('Downloading. url: %s, page: %s', url, page)
     resp = requests.get(url, {'page': page}, timeout=10)
     return resp.json()
